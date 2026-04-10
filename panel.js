@@ -18,23 +18,51 @@ const tokensSectionEl = document.getElementById("tokensSection");
 const tokensEl = document.getElementById("tokens");
 const dictionarySectionEl = document.getElementById("dictionarySection");
 const dictionaryFormsEl = document.getElementById("dictionaryForms");
+const emptyHintEl = document.getElementById("emptyHint");
 
 const originalSelection = getParam("selection");
 const initialQuery = getParam("query");
 const detectedScript = getParam("script");
+const prefillMode = getParam("prefill");
 
 selectionEl.value = originalSelection;
 queryInput.value = initialQuery;
 
 if (detectedScript === "manchu") {
   scriptInfoEl.textContent =
-    "Detected Manchu script and converted it to Daiqing-style romanization. Edit the query if the PDF copy text needs correction.";
+    "Detected Manchu script and converted it to Daiqing-style romanization. Edit the query if the copied text needs correction.";
 } else if (detectedScript === "latin") {
   scriptInfoEl.textContent =
-    "Detected Latin text and normalized it toward Daiqing spelling, such as x instead of š and q instead of c.";
+    "Detected Latin text and normalized it toward Daicing spelling, such as x instead of š, q instead of c, and v instead of û.";
 } else {
   scriptInfoEl.textContent =
-    "No usable text was detected. Try selecting the word again in the PDF.";
+    "No usable text was detected. Try selecting the word again.";
+}
+
+if (!initialQuery && !originalSelection) {
+  emptyHintEl.hidden = false;
+}
+
+async function prefillFromClipboardIfNeeded() {
+  if (prefillMode !== "clipboard" || queryInput.value.trim()) {
+    return;
+  }
+
+  try {
+    const clipboardText = (await navigator.clipboard.readText()).trim();
+
+    if (!clipboardText) {
+      return;
+    }
+
+    const normalized = ManchuTransliterator.normalizeSelection(clipboardText);
+    selectionEl.value = clipboardText;
+    queryInput.value = normalized.preferredLookup || normalized.normalized || clipboardText;
+    emptyHintEl.hidden = true;
+    syncFromSelection(true);
+  } catch {
+    // Keep the manual fallback visible.
+  }
 }
 
 function unique(values) {
@@ -142,6 +170,7 @@ function syncFromSelection(shouldAutosearch = false) {
   const normalizedSelection = ManchuTransliterator.normalizeSelection(sourceText);
 
   if (!sourceText) {
+    emptyHintEl.hidden = false;
     tokensSectionEl.hidden = true;
     tokensEl.replaceChildren();
     dictionarySectionEl.hidden = true;
@@ -150,6 +179,8 @@ function syncFromSelection(shouldAutosearch = false) {
     updateLookup();
     return;
   }
+
+  emptyHintEl.hidden = true;
 
   const tokens = tokenizeSelection(sourceText, normalizedSelection.detectedScript);
   if (tokens.length > 1 && !shouldAutosearch) {
@@ -187,3 +218,4 @@ selectionEl.addEventListener("input", () => {
 });
 
 syncFromSelection(Boolean(originalSelection || initialQuery));
+prefillFromClipboardIfNeeded();

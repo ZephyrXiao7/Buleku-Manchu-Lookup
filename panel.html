@@ -12,8 +12,8 @@
         <p class="eyebrow">Buleku Lookup</p>
         <h1>Selected Manchu word</h1>
         <p class="subtitle">
-          The lookup uses Daiqing-style romanization because that is what
-          Buleku expects most reliably.
+          The lookup uses Buleku's Daicing-style romanization and tries to reduce many verb forms to dictionary
+          <code>-mbi</code>.
         </p>
       </header>
 
@@ -41,6 +41,9 @@
         </div>
 
         <p id="scriptInfo" class="hint"></p>
+        <p id="emptyHint" class="hint" hidden>
+          If Google Docs did not expose the selection, paste or type the word here and search manually.
+        </p>
         <div id="dictionarySection" class="tokens-section" hidden>
           <label class="label" for="dictionaryForms">Possible dictionary forms</label>
           <div id="dictionaryForms" class="tokens" aria-live="polite"></div>

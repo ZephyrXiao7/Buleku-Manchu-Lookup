@@ -49,12 +49,7 @@
     ["benji", "benjimbi"],
     ["benju", "benjimbi"]
   ]);
-  const DIRECT_DICTIONARY_FORMS = new Set([
-    "bimbi",
-    "ombi",
-    "jembi",
-    "jimbi"
-  ]);
+  const DIRECT_DICTIONARY_FORMS = new Set(["bimbi", "ombi", "jembi", "jimbi"]);
   const VERB_RULES = [
     ["mbihe", (base) => `${base}mbi`],
     ["nggala", (base) => `${base}mbi`],
