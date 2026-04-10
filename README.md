@@ -1,4 +1,4 @@
-# Buleku Manchu Lookup for Firefox
+# Buleku Manchu Lookup: Firefox Extension
 
 This project is a small Firefox WebExtension for looking up selected Manchu words in Buleku.
 
