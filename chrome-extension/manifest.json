@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "Buleku Manchu Lookup",
+  "version": "0.1.0",
+  "description": "Look up selected Manchu words from Chrome, including PDF selections when available, in Buleku.",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "scripting",
+    "clipboardRead"
+  ],
+  "host_permissions": [
+    "https://buleku.org/*",
+    "https://www.buleku.org/*",
+    "https://docs.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Search selected Manchu in Buleku"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/*"
+      ],
+      "js": [
+        "selection-helper.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}

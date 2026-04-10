@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buleku Lookup</title>
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <p class="eyebrow">Buleku Lookup</p>
+        <h1>Selected Manchu word</h1>
+        <p class="subtitle">
+          The lookup uses Daiqing-style romanization because that is what
+          Buleku expects most reliably.
+        </p>
+      </header>
+
+      <section class="card">
+        <label class="label" for="selection">Original selection</label>
+        <textarea
+          id="selection"
+          class="selection-input"
+          rows="3"
+          spellcheck="false"
+          placeholder="Selected text will appear here. You can also paste text manually."
+        ></textarea>
+
+        <div id="tokensSection" class="tokens-section" hidden>
+          <label class="label" for="tokens">Words in selection</label>
+          <div id="tokens" class="tokens" aria-live="polite"></div>
+        </div>
+
+        <label class="label" for="query">Search query</label>
+        <div class="search-row">
+          <input id="query" class="query-input" type="text" autocomplete="off" />
+          <button id="searchButton" class="primary-button" type="button">
+            Search
+          </button>
+        </div>
+
+        <p id="scriptInfo" class="hint"></p>
+        <div id="dictionarySection" class="tokens-section" hidden>
+          <label class="label" for="dictionaryForms">Possible dictionary forms</label>
+          <div id="dictionaryForms" class="tokens" aria-live="polite"></div>
+        </div>
+
+        <div class="actions">
+          <a id="detailLink" class="action-link" href="#" target="_blank" rel="noreferrer">
+            Open Buleku entry
+          </a>
+          <a
+            id="homeLink"
+            class="action-link secondary"
+            href="https://buleku.org/home"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open Buleku home
+          </a>
+        </div>
+      </section>
+
+      <section class="viewer-card">
+        <div class="viewer-header">
+          <span>Inline result</span>
+          <span id="status" class="status">Loading</span>
+        </div>
+        <iframe
+          id="resultFrame"
+          class="viewer"
+          title="Buleku result"
+          loading="eager"
+          referrerpolicy="no-referrer"
+        ></iframe>
+      </section>
+    </main>
+
+    <script src="transliterate.js"></script>
+    <script src="panel.js"></script>
+  </body>
+</html>
