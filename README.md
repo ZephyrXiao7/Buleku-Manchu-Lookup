@@ -2,14 +2,19 @@
 
 This repository contains the Buleku Manchu Lookup browser add-on project.
 
-The project is organized into two implementation branches:
+## Folder Structure
 
-- `firefox-extension`: the Firefox add-on version, including PDF-oriented lookup support.
-- `chrome-extension`: the Google Chrome extension version.
+- `firefox-extension/`: the Firefox add-on version, including PDF-oriented lookup support
+- `chrome-extension/`: the Google Chrome extension version
 
-## Recommended Branches
+## Branches
 
-If you want to use or develop a specific browser version, switch to the matching branch:
+The repository also keeps browser-specific branches for focused development:
+
+- `firefox-extension`: Firefox files at the repository root
+- `chrome-extension`: Chrome files at the repository root
+
+If you want to work on a browser-specific branch directly:
 
 ```bash
 git checkout firefox-extension
@@ -21,18 +26,6 @@ or
 git checkout chrome-extension
 ```
 
-## Branch Overview
-
-### `firefox-extension`
-
-- Firefox-focused extension files at the repository root
-- README specific to Firefox installation and usage
-
-### `chrome-extension`
-
-- Chrome-focused extension files at the repository root
-- README specific to Chrome installation and usage
-
 ## Main Branch
 
-The `main` branch serves as the project landing page on GitHub and points to the two browser-specific branches above.
+The `main` branch serves as the GitHub landing page and keeps both browser versions in separate folders.
